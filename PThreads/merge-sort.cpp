@@ -124,9 +124,9 @@ int main()
 	t2 = clock();
 
 	// displaying sorted array
-	cout << "Sorted array: ";
-	for (int i = 0; i < MAX; i++)
-		cout << a[i] << " ";
+	// cout << "Sorted array: ";
+	// for (int i = 0; i < MAX; i++)
+	// 	cout << a[i] << " ";
 
 	// time taken by merge sort in seconds
 	cout << "Time taken: " << (t2 - t1) / 

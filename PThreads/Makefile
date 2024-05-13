@@ -5,4 +5,4 @@ bubbleSort: bubblesort.c
 	gcc -g -Wall -fopenmp -o BubbleSort bubblesort.c
 
 mergeSort: merge-sort.cpp
-	g++ -pthread program_name.cpp
+	g++ -o MergeSort -lpthread merge-sort.cpp
