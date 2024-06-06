@@ -43,7 +43,6 @@ void parallel_merge_sort(vector<int> &arr) {
 }
 int main() {
   int N;
-  cout << "Array Size: ";
   cin >> N;
 
   vector<int> arr(N, 0);

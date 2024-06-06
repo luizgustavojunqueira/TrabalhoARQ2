@@ -170,8 +170,6 @@ int main()
     struct data_set* info = new data_set;
 
     // Taking number of elements as input
-    cout << "Enter number of elements"
-         << " in the array: \n";
     cin >> N;
 
     // Declaration of array

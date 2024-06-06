@@ -90,7 +90,6 @@ void mergeSort(int array[], int const begin, int const end) {
 int main() {
   int N;
 
-  cout << "Array size: ";
   cin >> N;
 
   int arr[N];

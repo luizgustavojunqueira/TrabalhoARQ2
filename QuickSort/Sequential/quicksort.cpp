@@ -74,7 +74,6 @@ int main() {
 
   int N;
   // Taking number of elements as input
-  cout << "Enter number of elements" << " in the array: \n";
   cin >> N;
 
   // Declaration of array

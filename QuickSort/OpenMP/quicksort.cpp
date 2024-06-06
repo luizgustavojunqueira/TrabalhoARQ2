@@ -90,8 +90,6 @@ int main()
 
     // Taking input the number of
     // elements we wants
-    cout << "Enter the number of elements"
-         << " you want to Enter\n";
     cin >> N;
 
     // Declaration of array

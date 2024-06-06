@@ -5,10 +5,6 @@
 #include <sys/time.h>
 #include <time.h>
 
-
-// number of elements in array
-#define MAX 25000
-
 // number of threads
 #define THREAD_MAX 4
 
@@ -29,7 +25,8 @@ double read_timer() {
 }
 
 // array of size MAX
-int a[MAX];
+int MAX = 0;
+int *a;
 int part = 0;
 
 // merge function for merging two parts
@@ -108,6 +105,8 @@ void *merge_sort(void *arg) {
 
 // Driver Code
 int main() {
+    cin >> MAX;
+    a = (int*) malloc(sizeof(int) * MAX);
   // generating random values in array
   for (int i = 0; i < MAX; i++)
     a[i] = rand() % MAX;
