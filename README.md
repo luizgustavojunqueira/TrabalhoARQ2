@@ -13,8 +13,17 @@ Desenvolver e/ou utilizar versões de algoritmos de ordenção implementadas nas
 ## Algoritmos de ordenação escolhidos
 
 - BubbleSort
+    - PThreads = V 
+    - OpenMP = V
+    - Sequential = V
 - MergeSort
+    - PThreads = V
+    - OpenMP = V
+    - Sequential = V
 - QuickSort
+    - PThreads = V
+    - OpenMP = V
+    - Sequential = V
 
 ## Referências dos códigos utilizados
 
@@ -22,3 +31,10 @@ https://www.geeksforgeeks.org/implementation-of-quick-sort-using-mpi-omp-and-pos
 
 https://github.com/Malhadas/Parallel-BubbleSort-/blob/master/bubble.c
 
+https://medium.com/@ITigerMouth/parallel-bubble-sort-and-merge-sort-using-openmp-5ee7bf3ab52e
+
+https://www.geeksforgeeks.org/merge-sort-using-multi-threading/?ref=header_search
+
+https://www.geeksforgeeks.org/cpp-program-for-merge-sort/?ref=lbp
+
+https://www.geeksforgeeks.org/cpp-program-for-quicksort/

@@ -2,7 +2,25 @@
 // using POSIX Thread
 #include <bits/stdc++.h>
 #include <pthread.h>
+#include <time.h>
+#include <sys/time.h>
+
 using namespace std;
+
+double start_time, end_time; /* start and end times */
+
+double read_timer() {
+    static bool initialized = false;
+    static struct timeval start;
+    struct timeval end;
+    if( !initialized )
+    {
+        gettimeofday( &start, NULL );
+        initialized = true;
+    }
+    gettimeofday( &end, NULL );
+    return (end.tv_sec - start.tv_sec) + 1.0e-6 * (end.tv_usec - start.tv_usec);
+}
 
 // Structure
 struct data_set {
@@ -56,6 +74,7 @@ int partition(int arr[], int left_index,
 // array
 void* quick_sort(void* data)
 {
+
     // Retrieving back the data sent
     // from thread
     struct data_set* info = (struct data_set*)data;
@@ -159,9 +178,8 @@ int main()
     int A[N];
 
     // Initialization of array
-    cout << "Enter the array: " << endl;
     for (int i = 0; i < N; i++) {
-        cin >> A[i];
+        A[i] = rand() % N;
     }
 
     // Initialize of structure of
@@ -185,8 +203,10 @@ int main()
         exit(-1);
     }
 
+    start_time = read_timer();
     // Joining the pthread object
     int r1 = pthread_join(thread_id, NULL);
+    end_time = read_timer();
 
     // Printing the array if any in case
     // of joining
@@ -198,16 +218,12 @@ int main()
         exit(-1);
     }
 
-    // Printing the array after sorting
-    cout << "Sorted Array is: " << endl;
-
-    for (int i = 0; i < N; i++) {
-        cout << A[i] << " ";
-    }
-    cout << endl;
+    cout << "Time: " << end_time - start_time << endl;
 
     // Exiting from pthread programming
     pthread_exit(NULL);
 
+
     return 0;
 }
+

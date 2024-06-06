@@ -2,7 +2,26 @@
 // using OMI
 #include <bits/stdc++.h>
 #include <omp.h>
+#include <time.h>
+#include <sys/time.h>
+
 using namespace std;
+
+double start_time, end_time; /* start and end times */
+
+double read_timer() {
+    static bool initialized = false;
+    static struct timeval start;
+    struct timeval end;
+    if( !initialized )
+    {
+        gettimeofday( &start, NULL );
+        initialized = true;
+    }
+    gettimeofday( &end, NULL );
+    return (end.tv_sec - start.tv_sec) + 1.0e-6 * (end.tv_usec - start.tv_usec);
+}
+
 
 // Function to swap two numbers a and b
 void swap(int* a, int* b)
@@ -78,23 +97,17 @@ int main()
     // Declaration of array
     int arr[N];
 
-    cout << "Enter the array: \n";
-
     // Taking input that array
     for (int i = 0; i < N; i++) {
-        cin >> arr[i];
+        arr[i] = rand() % N;
     }
 
     // Calling quicksort having parallel
     // code implementation
+    start_time = read_timer();
     quicksort(arr, 0, N - 1);
+    end_time = read_timer();
 
-    // Printing the sorted array
-    cout << "Array after Sorting is: \n";
-
-    for (int i = 0; i < N; i++) {
-        cout << arr[i] << " ";
-    }
-
+    cout << "Time: " << end_time - start_time << endl;
     return 0;
 }
