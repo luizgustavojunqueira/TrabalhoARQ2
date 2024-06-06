@@ -2,7 +2,9 @@
 // multi-threading
 #include <iostream>
 #include <pthread.h>
+#include <sys/time.h>
 #include <time.h>
+
 
 // number of elements in array
 #define MAX 25000
@@ -11,6 +13,20 @@
 #define THREAD_MAX 4
 
 using namespace std;
+
+double start_time, end_time; /* start and end times */
+
+double read_timer() {
+  static bool initialized = false;
+  static struct timeval start;
+  struct timeval end;
+  if (!initialized) {
+    gettimeofday(&start, NULL);
+    initialized = true;
+  }
+  gettimeofday(&end, NULL);
+  return (end.tv_sec - start.tv_sec) + 1.0e-6 * (end.tv_usec - start.tv_usec);
+}
 
 // array of size MAX
 int a[MAX];
@@ -94,13 +110,9 @@ void *merge_sort(void *arg) {
 int main() {
   // generating random values in array
   for (int i = 0; i < MAX; i++)
-    a[i] = rand() % 100;
+    a[i] = rand() % MAX;
 
-  // t1 and t2 for calculating time for
-  // merge sort
-  clock_t t1, t2;
-
-  t1 = clock();
+  start_time = read_timer();
   pthread_t threads[THREAD_MAX];
 
   // creating 4 threads
@@ -116,15 +128,13 @@ int main() {
   merge(MAX / 2, MAX / 2 + (MAX - 1 - MAX / 2) / 2, MAX - 1);
   merge(0, (MAX - 1) / 2, MAX - 1);
 
-  t2 = clock();
-
+  end_time = read_timer();
   // displaying sorted array
   // cout << "Sorted array: ";
   // for (int i = 0; i < MAX; i++)
   // 	cout << a[i] << " ";
 
   // time taken by merge sort in seconds
-  cout << "Time taken: " << (t2 - t1) / (double)CLOCKS_PER_SEC << endl;
-
+    cout << "Pthreads Time: " << end_time - start_time << endl;
   return 0;
 }

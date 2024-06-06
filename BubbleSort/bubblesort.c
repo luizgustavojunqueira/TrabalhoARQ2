@@ -88,7 +88,6 @@ int main(int argc, char *argv[]) {
 
   if (g_i == 'g') {
     Generate_list(a, n);
-    // Print_list(a, n, "Before sort");
   } else {
     Read_list(a, n);
   }
@@ -107,13 +106,13 @@ int main(int argc, char *argv[]) {
   Bubble_sort_OMP(b, n);
   end_time = read_timer();
   t = (double)(end_time - start_time);
-  printf("OMP Time: %g, Valid:%d\n", t, validate(a, b, n));
+  printf("OMP Time: %g\n", t);
 
   start_time = read_timer();
   Bubble_sort_pthreads(c, n);
   end_time = read_timer();
   t = (double)(end_time - start_time);
-  printf("Pthreads Time: %g, Valid:%d\n", t, validate(a, c, n));
+  printf("Pthreads Time: %g\n", t);
 
   free(a);
   free(b);

@@ -38,3 +38,18 @@ https://www.geeksforgeeks.org/merge-sort-using-multi-threading/?ref=header_searc
 https://www.geeksforgeeks.org/cpp-program-for-merge-sort/?ref=lbp
 
 https://www.geeksforgeeks.org/cpp-program-for-quicksort/
+
+## Experimento
+
+O tempo dos algoritmos foi medido da seguinte maneira.
+
+
+Primeiramente, scolhemos 3 quantidades de elementos para o vetor a ser ordenado pelos algoritmos:
+
+- 1000
+- 10000
+- 25000
+
+Esses vetores são gerados aleatóriamente para cada execução.
+
+Cada algoritmo foi executado 10 vezes com cada quantidade de elementos e foi utilizada a média te tempo de execuções sem segundos.

@@ -57,6 +57,6 @@ int main() {
   start = omp_get_wtime();
   parallel_merge_sort(arr);
   end = omp_get_wtime();
-  cout << "Time: " << end - start << endl;
+  cout << "OMP Time: " << end - start << endl;
   return 0;
 }
