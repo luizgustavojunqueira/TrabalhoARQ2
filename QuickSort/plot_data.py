@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-os.chdir("./TempoMaquinaLG")
+os.chdir("./tempo-maquina-2")
 
 tamVetor = np.sort(os.listdir())
 

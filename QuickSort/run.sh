@@ -3,7 +3,7 @@ cd OpenMP && make quickSort && cd ..
 cd PThreads && make quickSort && cd ..
 cd Sequential && make quickSort && cd ..
 
-DIR="TempoMaquinaLG"
+DIR="tempo-maquina-2"
 
 rm -rf $DIR
 mkdir $DIR
