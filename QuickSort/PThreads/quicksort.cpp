@@ -216,7 +216,7 @@ int main()
         exit(-1);
     }
 
-    cout << "Pthreads: Time: " << end_time - start_time << endl;
+    cout << "Pthreads Time: " << end_time - start_time << endl;
 
     // Exiting from pthread programming
     pthread_exit(NULL);

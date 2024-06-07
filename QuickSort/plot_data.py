@@ -36,7 +36,7 @@ plt.plot(tamVetor, tempoExecSequential, 'o')
 plt.plot(tamVetor, tempoExecOpenMP, 'o')
 plt.plot(tamVetor, tempoExecPThreads, 'o')
 
-plt.title("BubbleSort")
+plt.title("QuickSort")
 plt.ylabel("Tempo")
 plt.xlabel("Tamanho")
 plt.show()

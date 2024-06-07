@@ -106,6 +106,6 @@ int main()
     quicksort(arr, 0, N - 1);
     end_time = read_timer();
 
-    cout << "OMP: Time: " << end_time - start_time << endl;
+    cout << "OMP Time: " << end_time - start_time << endl;
     return 0;
 }
