@@ -10,6 +10,9 @@ tempoExecSequential = np.array([])
 tempoExecPThreads = np.array([])
 tempoExecOpenMP = np.array([])
 
+speedUpPThreads = np.array([])
+speedUpOpenMP = np.array([])
+
 for t in tamVetor:
     with open(f"./{t}/tempos.out") as file:
         line = file.readline()
@@ -27,9 +30,29 @@ for t in tamVetor:
 
             line = file.readline()
 
-        tempoExecSequential = np.append(tempoExecSequential, np.mean(tS))
-        tempoExecOpenMP = np.append(tempoExecOpenMP, np.mean(tO))
-        tempoExecPThreads = np.append(tempoExecPThreads, np.mean(tP))
+        mediaS = np.mean(tS) 
+        mediaO = np.mean(tO)
+        mediaP = np.mean(tP) 
+
+        tempoExecSequential = np.append(tempoExecSequential, mediaS)
+        tempoExecOpenMP = np.append(tempoExecOpenMP, mediaO)
+        tempoExecPThreads = np.append(tempoExecPThreads, mediaP)
+       
+        if mediaS > mediaP:
+            speedUpPThreads = np.append(speedUpPThreads, mediaP/mediaS)
+        else:
+            speedUpPThreads = np.append(speedUpPThreads, mediaS/mediaP)
+
+        if mediaS > mediaO:
+            speedUpOpenMP = np.append(speedUpOpenMP, mediaO/mediaS)
+        else:
+            speedUpOpenMP = np.append(speedUpOpenMP, mediaS/mediaO)
+
+print(f"Tempo Execução Sequencial: {tempoExecSequential}")
+print(f"Tempo Execução PThreads: {tempoExecPThreads}")
+print(f"Tempo Execução OpenMP: {tempoExecOpenMP}")
+print(f'SpeedUp PThreads: {speedUpPThreads}')
+print(f'SpeedUp OpenMP: {speedUpOpenMP}')
 
 
 plt.plot(tamVetor, tempoExecSequential, 'o')
