@@ -3,31 +3,27 @@ cd OpenMP && make mergeSort && cd ..
 cd PThreads && make mergeSort && cd ..
 cd Sequential && make mergeSort && cd ..
 
-DIR="TempoMaquinaLG"
+DIR="tempo-maquina-1"
 
 rm -rf $DIR
 mkdir $DIR
-mkdir $DIR/1000
-mkdir $DIR/10000
-mkdir $DIR/25000
 
-echo "Rodando OpenMP para 1000 numeros"
-for x in {1..10}; do ./OpenMP/MergeSort < 1000.txt >> ./$DIR/1000/tempos.out; done
-echo "Rodando OpenMP para 10000 numeros"
-for x in {1..10}; do ./OpenMP/MergeSort < 10000.txt >> ./$DIR/10000/tempos.out; done
-echo "Rodando OpenMP para 25000 numeros"
-for x in {1..10}; do ./OpenMP/MergeSort < 25000.txt >> ./$DIR/25000/tempos.out; done
+for n in {1000,10000,100000,1000000,10000000}; do
+  mkdir $DIR/"$n"
 
-echo "Rodando PThreads para 1000 numeros"
-for x in {1..10}; do ./PThreads/MergeSort < 1000.txt >> ./$DIR/1000/tempos.out; done
-echo "Rodando PThreads para 10000 numeros"
-for x in {1..10}; do ./PThreads/MergeSort < 10000.txt >> ./$DIR/10000/tempos.out; done
-echo "Rodando PThreads para 25000 numeros"
-for x in {1..10}; do ./PThreads/MergeSort < 25000.txt >> ./$DIR/25000/tempos.out; done
+  echo "Rodando Sequential para $n numeros"
+  for x in {1..10}; do
+    ./Sequential/MergeSort <<<"$n" >>./$DIR/"$n"/tempos.out
+  done
 
-echo "Rodando Sequential para 1000 numeros"
-for x in {1..10}; do ./Sequential/MergeSort < 1000.txt >> ./$DIR/1000/tempos.out; done
-echo "Rodando Sequential para 10000 numeros"
-for x in {1..10}; do ./Sequential/MergeSort < 10000.txt >> ./$DIR/10000/tempos.out; done
-echo "Rodando Sequential para 25000 numeros"
-for x in {1..10}; do ./Sequential/MergeSort < 25000.txt >> ./$DIR/25000/tempos.out; done
+  for numThreads in {2,4,8}; do
+    echo "Rodando OpenMP para $n numeros com $numThreads threads"
+    for x in {1..10}; do
+      ./OpenMP/MergeSort <<<"$n $numThreads" >>./$DIR/"$n"/tempos.out
+    done
+    echo "Rodando PThreads para $n numeros com $numThreads threads"
+    for x in {1..10}; do
+      ./PThreads/MergeSort -M"$n" -T"$numThreads" >>./$DIR/"$n"/tempos.out
+    done
+  done
+done

@@ -28,7 +28,7 @@ const int RMAX = 100;
 
 /* Function prototypes */
 void Usage(char *prog_name);
-void Get_args(int argc, char *argv[], int *n_p, int *n_t, char *g_i_p);
+void Get_args(int argc, char *argv[], int *n_p, int *n_t, char *g_i_p, int *shouldSequential);
 void Generate_list(int a[], int n);
 void Cpy_list(int a[], int b[], int n);
 void Print_list(int a[], int n, char *title);
@@ -76,7 +76,9 @@ int main(int argc, char *argv[]) {
   int *b;
   int *c;
 
-  Get_args(argc, argv, &n, &num_threads, &g_i);
+  int shouldSequential;
+
+  Get_args(argc, argv, &n, &num_threads, &g_i, &shouldSequential);
   a = (int *)malloc(n * sizeof(int));
   b = (int *)malloc(n * sizeof(int));
   c = (int *)malloc(n * sizeof(int));
@@ -96,23 +98,25 @@ int main(int argc, char *argv[]) {
 
   double t;
 
-  start_time = read_timer();
-  Bubble_sort(a, n);
-  end_time = read_timer();
-  t = (double)(end_time - start_time);
-  printf("Seq Time: %g\n", t);
+  if(shouldSequential == 1){
+    start_time = read_timer();
+    Bubble_sort(a, n);
+    end_time = read_timer();
+    t = (double)(end_time - start_time);
+    printf("Seq Time: %g\n", t);
+  }
 
   start_time = read_timer();
   Bubble_sort_OMP(b, n);
   end_time = read_timer();
   t = (double)(end_time - start_time);
-  printf("OMP Time: %g\n", t);
+  printf("OMP Time %d: %g\n", num_threads, t);
 
   start_time = read_timer();
   Bubble_sort_pthreads(c, n);
   end_time = read_timer();
   t = (double)(end_time - start_time);
-  printf("Pthreads Time: %g\n", t);
+  printf("Pthreads Time %d: %g\n", num_threads, t);
 
   free(a);
   free(b);
@@ -131,6 +135,7 @@ void Usage(char *prog_name) {
           "  'g':           generate list using a random number generator\n");
   fprintf(stderr, "  'i':           user input list\n");
   fprintf(stderr, "  'num_threads': for parallel versions\n");
+  fprintf(stderr, "  'shouldSequential': 1 for sequential, 0 to don't run sequential\n");
 } /* Usage */
 
 /*-----------------------------------------------------------------
@@ -139,14 +144,15 @@ void Usage(char *prog_name) {
  * In args:   argc, argv
  * Out args:  n_p, g_i_p
  */
-void Get_args(int argc, char *argv[], int *n_p, int *num_threads, char *g_i_p) {
-  if (argc != 4) {
+void Get_args(int argc, char *argv[], int *n_p, int *num_threads, char *g_i_p, int *shouldSequential) {
+  if (argc != 5) {
     Usage(argv[0]);
     exit(0);
   }
   *n_p = atoi(argv[1]);
   *num_threads = atoi(argv[3]);
   *g_i_p = argv[2][0];
+  *shouldSequential = atoi(argv[4]);
 
   if (*n_p <= 0 || (*g_i_p != 'g' && *g_i_p != 'i')) {
     Usage(argv[0]);

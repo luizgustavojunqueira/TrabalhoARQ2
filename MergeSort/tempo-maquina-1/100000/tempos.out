@@ -1,0 +1,70 @@
+Seq Time: 0.052913
+Seq Time: 0.052669
+Seq Time: 0.052794
+Seq Time: 0.052719
+Seq Time: 0.052749
+Seq Time: 0.052643
+Seq Time: 0.052713
+Seq Time: 0.052748
+Seq Time: 0.052704
+Seq Time: 0.053251
+OMP Time 2: 0.0150812
+OMP Time 2: 0.0151026
+OMP Time 2: 0.0151027
+OMP Time 2: 0.015046
+OMP Time 2: 0.0150719
+OMP Time 2: 0.0151179
+OMP Time 2: 0.0154224
+OMP Time 2: 0.015775
+OMP Time 2: 0.0153139
+OMP Time 2: 0.0150638
+Pthreads Time 2: 0.019597
+Pthreads Time 2: 0.020129
+Pthreads Time 2: 0.019603
+Pthreads Time 2: 0.019530
+Pthreads Time 2: 0.020860
+Pthreads Time 2: 0.019734
+Pthreads Time 2: 0.019538
+Pthreads Time 2: 0.019622
+Pthreads Time 2: 0.019605
+Pthreads Time 2: 0.019504
+OMP Time 4: 0.0135222
+OMP Time 4: 0.0142432
+OMP Time 4: 0.0111989
+OMP Time 4: 0.0122328
+OMP Time 4: 0.0123546
+OMP Time 4: 0.0118202
+OMP Time 4: 0.011589
+OMP Time 4: 0.0115989
+OMP Time 4: 0.0122961
+OMP Time 4: 0.0115352
+Pthreads Time 4: 0.014064
+Pthreads Time 4: 0.016877
+Pthreads Time 4: 0.012207
+Pthreads Time 4: 0.012504
+Pthreads Time 4: 0.012023
+Pthreads Time 4: 0.016896
+Pthreads Time 4: 0.011955
+Pthreads Time 4: 0.012023
+Pthreads Time 4: 0.012118
+Pthreads Time 4: 0.017013
+OMP Time 8: 0.0119
+OMP Time 8: 0.0171795
+OMP Time 8: 0.0109651
+OMP Time 8: 0.0122573
+OMP Time 8: 0.0129554
+OMP Time 8: 0.0123787
+OMP Time 8: 0.0109306
+OMP Time 8: 0.0119445
+OMP Time 8: 0.01204
+OMP Time 8: 0.0115522
+Pthreads Time 8: 0.013875
+Pthreads Time 8: 0.017648
+Pthreads Time 8: 0.017751
+Pthreads Time 8: 0.013209
+Pthreads Time 8: 0.012953
+Pthreads Time 8: 0.013368
+Pthreads Time 8: 0.012993
+Pthreads Time 8: 0.012881
+Pthreads Time 8: 0.012988
+Pthreads Time 8: 0.013008

@@ -1,2 +1,2 @@
-mergeSort: merge-sort.cpp
-	g++ -o MergeSort merge-sort.cpp -lpthread
+mergeSort: merge.c
+	gcc -o MergeSort merge.c -lpthread

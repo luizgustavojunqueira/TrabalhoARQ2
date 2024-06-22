@@ -1,0 +1,7 @@
+Seq Time: 61.7303
+OMP Time 2: 53.9389
+Pthreads Time 2: 56.2838
+OMP Time 4: 32.0355
+Pthreads Time 4: 16.3408
+OMP Time 8: 12.0068
+Pthreads Time 8: 12.5658

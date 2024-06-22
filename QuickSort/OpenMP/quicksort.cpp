@@ -1,111 +1,138 @@
-// C++ program to implement the Quick Sort
-// using OMI
-#include <bits/stdc++.h>
+#include <assert.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <omp.h>
-#include <time.h>
-#include <sys/time.h>
+#include <iostream>
 
 using namespace std;
 
-double start_time, end_time; /* start and end times */
+#define TASK_SIZE 100
 
-double read_timer() {
-    static bool initialized = false;
-    static struct timeval start;
-    struct timeval end;
-    if( !initialized )
+unsigned int rand_interval(unsigned int min, unsigned int max)
+{
+    // https://stackoverflow.com/questions/2509679/
+    int r;
+    const unsigned int range = 1 + max - min;
+    const unsigned int buckets = RAND_MAX / range;
+    const unsigned int limit = buckets * range;
+
+    do
     {
-        gettimeofday( &start, NULL );
-        initialized = true;
+        r = rand();
+    } 
+    while (r >= limit);
+
+    return min + (r / buckets);
+}
+
+void fillupRandomly (int *m, int size, unsigned int min, unsigned int max){
+    for (int i = 0; i < size; i++)
+    m[i] = rand_interval(min, max);
+} 
+
+
+void init(int *a, int size){
+   for(int i = 0; i < size; i++)
+       a[i] = 0;
+}
+
+void printArray(int *a, int size){
+   for(int i = 0; i < size; i++)
+       printf("%d ", a[i]);
+   printf("\n");
+}
+
+int isSorted(int *a, int size){
+   for(int i = 0; i < size - 1; i++)
+      if(a[i] > a[i + 1])
+        return 0;
+   return 1;
+}
+
+
+int partition(int * a, int p, int r)
+{
+    int lt[r-p];
+    int gt[r-p];
+    int i;
+    int j;
+    int key = a[r];
+    int lt_n = 0;
+    int gt_n = 0;
+
+    for(i = p; i < r; i++){
+        if(a[i] < a[r]){
+            lt[lt_n++] = a[i];
+        }else{
+            gt[gt_n++] = a[i];
+        }   
+    }   
+
+    for(i = 0; i < lt_n; i++){
+        a[p + i] = lt[i];
+    }   
+
+    a[p + lt_n] = key;
+
+    for(j = 0; j < gt_n; j++){
+        a[p + lt_n + j + 1] = gt[j];
+    }   
+
+    return p + lt_n;
+}
+
+void quicksort(int * a, int p, int r)
+{
+    int div;
+
+    if(p < r){ 
+        div = partition(a, p, r); 
+	#pragma omp task shared(a) if(r - p > TASK_SIZE)
+        quicksort(a, p, div - 1); 
+	#pragma omp task shared(a) if(r - p > TASK_SIZE)
+        quicksort(a, div + 1, r); 
     }
-    gettimeofday( &end, NULL );
-    return (end.tv_sec - start.tv_sec) + 1.0e-6 * (end.tv_usec - start.tv_usec);
 }
 
-
-// Function to swap two numbers a and b
-void swap(int* a, int* b)
+int main(int argc, char *argv[])
 {
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
+        srand(123456);
+        int N  = 0;
+        int numThreads = 0;
 
-// Function to perform the partitioning
-// of array arr[]
-int partition(int arr[], int start, int end)
-{
-    // Declaration
-    int pivot = arr[end];
-    int i = (start - 1);
+        cin >> N >> numThreads;
 
-    // Rearranging the array
-    for (int j = start; j <= end - 1; j++) {
-        if (arr[j] < pivot) {
-            i++;
-            swap(&arr[i], &arr[j]);
+        int *X = (int *)malloc(N * sizeof(int));
+        int *tmp = (int *)malloc(N * sizeof(int));
+
+        omp_set_dynamic(0);              /** Explicitly disable dynamic teams **/
+        omp_set_num_threads(numThreads); /** Use N threads for all parallel regions **/
+
+         // Dealing with fail memory allocation
+        if(!X || !tmp)
+        { 
+           if(X) free(X);
+           if(tmp) free(tmp);
+           return (EXIT_FAILURE);
         }
-    }
-    swap(&arr[i + 1], &arr[end]);
 
-    // Returning the respective index
-    return (i + 1);
-}
+        fillupRandomly (X, N, 0, 5);
 
-// Function to perform QuickSort Algorithm
-// using openmp
-void quicksort(int arr[], int start, int end)
-{
-    // Declaration
-    int index;
-
-    if (start < end) {
-
-        // Getting the index of pivot
-        // by partitioning
-        index = partition(arr, start, end);
-
-// Parallel sections
-#pragma omp parallel sections
+        double begin = omp_get_wtime();
+        #pragma omp parallel
         {
-#pragma omp section
-            {
-                // Evaluating the left half
-                quicksort(arr, start, index - 1);
-            }
-#pragma omp section
-            {
-                // Evaluating the right half
-                quicksort(arr, index + 1, end);
-            }
-        }
-    }
-}
+            #pragma omp single
+             quicksort(X, 0, N);
+        }   
+        double end = omp_get_wtime();
+        printf("OpenMP Time %d: %f (s) \n", numThreads, end-begin);
+    
+        assert(1 == isSorted(X, N));
 
-// Driver Code
-int main()
-{
-    // Declaration
-    int N;
+        free(X);
+        free(tmp);
+        return (EXIT_SUCCESS);
 
-    // Taking input the number of
-    // elements we wants
-    cin >> N;
-
-    // Declaration of array
-    int arr[N];
-
-    // Taking input that array
-    for (int i = 0; i < N; i++) {
-        arr[i] = rand() % N;
-    }
-
-    // Calling quicksort having parallel
-    // code implementation
-    start_time = read_timer();
-    quicksort(arr, 0, N - 1);
-    end_time = read_timer();
-
-    cout << "OMP Time: " << end_time - start_time << endl;
     return 0;
 }

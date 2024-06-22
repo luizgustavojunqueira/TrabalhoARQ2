@@ -1,18 +1,27 @@
 #!/bin/bash
 
-DIR="tempo-maquina-2"
+DIR="tempo-maquina-1"
 
 make bubbleSort
 
 rm -rf $DIR
 mkdir $DIR
-mkdir $DIR/1000
-mkdir $DIR/10000
-mkdir $DIR/25000
 
-echo "Rodando para 1000 numeros"
-for x in {1..10}; do ./BubbleSort 1000 g 16 >> ./$DIR/1000/tempos.out; done
-echo "Rodando para 10000 numeros"
-for x in {1..10}; do ./BubbleSort 10000 g 16 >> ./$DIR/10000/tempos.out; done
-echo "Rodando para 25000 numeros"
-for x in {1..10}; do ./BubbleSort 25000 g 16 >> ./$DIR/25000/tempos.out; done
+for n in {1000,10000}; do
+  mkdir $DIR/"$n"
+  echo "Rodando para $n numeros com 2 threads"
+  for x in {1..10}; do ./BubbleSort "$n" g 2 1 >>./$DIR/"$n"/tempos.out; done
+  for numThreads in {4,8}; do
+    echo "Rodando para $n numeros com $numThreads threads"
+    for x in {1..10}; do ./BubbleSort "$n" g "$numThreads" 0 >>./$DIR/"$n"/tempos.out; done
+  done
+done
+
+n=100000
+mkdir $DIR/"$n"
+echo "Rodando para $n numeros com 2 threads"
+./BubbleSort "$n" g 2 1 >>./$DIR/"$n"/tempos.out
+for numThreads in {4,8}; do
+  echo "Rodando para $n numeros com $numThreads threads"
+  ./BubbleSort "$n" g "$numThreads" 0 >>./$DIR/"$n"/tempos.out
+done

@@ -1,2 +1,2 @@
-quickSort: quicksort.cpp
-	g++ -o QuickSort quicksort.cpp -lpthread
+quickSort: quicksort.c
+	gcc -o QuickSort quicksort.c -lpthread

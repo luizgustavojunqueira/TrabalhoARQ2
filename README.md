@@ -31,9 +31,9 @@ https://www.geeksforgeeks.org/implementation-of-quick-sort-using-mpi-omp-and-pos
 
 https://github.com/Malhadas/Parallel-BubbleSort-/blob/master/bubble.c
 
-https://medium.com/@ITigerMouth/parallel-bubble-sort-and-merge-sort-using-openmp-5ee7bf3ab52e
+https://github.com/dreamcrash/StackOverflow-/blob/main/OpenMP/MergeSort/main.c
 
-https://www.geeksforgeeks.org/merge-sort-using-multi-threading/?ref=header_search
+https://stackoverflow.com/questions/52767944/merge-sort-with-pthreads-in-c#:~:text=number%20of%20threads%3A-,%23include%20%3Cstdio.h%3E,-%23include%20%3Cpthread
 
 https://www.geeksforgeeks.org/cpp-program-for-merge-sort/?ref=lbp
 
@@ -44,11 +44,13 @@ https://www.geeksforgeeks.org/cpp-program-for-quicksort/
 O tempo dos algoritmos foi medido da seguinte maneira.
 
 
-Primeiramente, scolhemos 3 quantidades de elementos para o vetor a ser ordenado pelos algoritmos:
+Primeiramente, escolhemos 5 quantidades de elementos para o vetor a ser ordenado pelos algoritmos:
 
 - 1000
 - 10000
-- 25000
+- 100000
+- 1000000
+- 10000000
 
 Esses vetores são gerados aleatóriamente para cada execução.
 
