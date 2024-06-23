@@ -1,2 +1,2 @@
 quickSort: quicksort.c
-	gcc -o QuickSort quicksort.c -lpthread
+	gcc -O3 -Wall -o QuickSort quicksort.c -lpthread

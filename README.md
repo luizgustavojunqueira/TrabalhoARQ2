@@ -29,6 +29,10 @@ Desenvolver e/ou utilizar versões de algoritmos de ordenção implementadas nas
 
 https://www.geeksforgeeks.org/implementation-of-quick-sort-using-mpi-omp-and-posix-thread/
 
+https://github.com/ChristianMagnerfelt/ParallelQuicksort/blob/master/quicksort.c
+
+https://github.com/dreamcrash/StackOverflow-/tree/main/OpenMP/QuickSort
+
 https://github.com/Malhadas/Parallel-BubbleSort-/blob/master/bubble.c
 
 https://github.com/dreamcrash/StackOverflow-/blob/main/OpenMP/MergeSort/main.c
