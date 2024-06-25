@@ -4,26 +4,23 @@
 
 Desenvolver e/ou utilizar versões de algoritmos de ordenção implementadas nas bibliotecas OpenMP e Pthreads para avaliar o desempenho desses algoritmos (pelo menos, 3 algoritmos diferentes de ordenação) em uma máquina com, ao menos, 4 cores. 
 
-## Configuração da Máquina utilizada
+## Configuração das Máquinas utilizada
 
-- OS: Ubuntu 22.04.4 LTS x86_64
-- CPU: Intel I5-10210U (4 Cores 8 Threads) @ 1.600 GHz
-- RAM: 8GB
+- Máquina 1:
+    - OS: Ubuntu 22.04.4 LTS x86_64
+    - CPU: Intel I5-10210U (4 Cores 8 Threads) @ 1.600 GHz
+    - RAM: 8GB
+
+- Máquina 2:
+    - Sistema Operacional: Ubuntu 22.04.4 LTS x86_64
+    - Processador: AMD Ryzen 7 5700G (8 Cores e 16 Threads) @ 3.2 - 4.6 GHz
+    - RAM: 16 GB
 
 ## Algoritmos de ordenação escolhidos
 
 - BubbleSort
-    - PThreads = V 
-    - OpenMP = V
-    - Sequential = V
 - MergeSort
-    - PThreads = V
-    - OpenMP = V
-    - Sequential = V
 - QuickSort
-    - PThreads = V
-    - OpenMP = V
-    - Sequential = V
 
 ## Referências dos códigos utilizados
 
@@ -47,15 +44,14 @@ https://www.geeksforgeeks.org/cpp-program-for-quicksort/
 
 O tempo dos algoritmos foi medido da seguinte maneira.
 
-
 Primeiramente, escolhemos 5 quantidades de elementos para o vetor a ser ordenado pelos algoritmos:
 
 - 1000
 - 10000
 - 100000
-- 1000000
-- 10000000
+- 1000000 (Menos para o BubbleSort)
+- 10000000 (Menos para o BubbleSort)
 
 Esses vetores são gerados aleatóriamente para cada execução.
 
-Cada algoritmo foi executado 10 vezes com cada quantidade de elementos e foi utilizada a média te tempo de execuções sem segundos.
+Cada algoritmo foi executado 10 vezes com cada quantidade de elementos para cada número de threads (2,4,8 e 16) e foi utilizada a média te tempo de execuções sem segundos
