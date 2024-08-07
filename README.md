@@ -1,4 +1,14 @@
-# TrabalhoARQ2
+# Trabalho Prático - Arquitetura de Computadores 2
+
+Esse repositório contém os códigos desenvolvidos para o Trabalho Pŕatico da disciplina de Arquitetura de Computadores 2 do curso de Ciência da Computação na UFMS.
+
+## Alunos
+
+Esse projeto foi desenvolvido pelo seguinte grupo de 3 alunos:
+
+- [Luiz Gustavo](https://github.com/luizgustavojunqueira)
+- [Camila Cardoso](https://github.com/camilacaceres1d)
+- [Carlos Trindade](https://github.com/CarlosTrindade1) 
 
 ## Proposta
 
